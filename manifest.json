@@ -1,6 +1,6 @@
 {
-    "name": "USD to RAI Replacer",
-    "description": "Replaces all USD price occurances by the current RAI equivalent",
+    "name": "Currency Replacer",
+    "description": "Can replaces occurances of one currency (e.g. USD) with their equivalent in a different currency (e.g. RAI)",
     "version": "0.1",
     "manifest_version": 3,
     "content_scripts": [
