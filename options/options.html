@@ -5,10 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Replacer - Options</title>
+    <link rel="stylesheet" href="options.css">
 </head>
 <body>
-    <label for="output_format">Output format</label>
-    <input type="text" id="output_format" />
+    <div class="category">
+        <label for="output_format">Output format</label></br />
+        <div class="row">
+            <input type="text" id="output_format" />
+        </div>
+    </div>
+
+    <div class="category">
+        Search patterns (Regex):
+        <div id="patterns"></div>
+    </div>
 
     <div id="status"></div>
     <button id="save">Save</button>

@@ -14,7 +14,32 @@ function save_options() {
 
 function restore_options() {
     chrome.storage.sync.get(default_options, (items) => {
+        // Output format
         document.getElementById("output_format").value = items.output_format;
+
+        //Patterns
+        let patternContainer = document.getElementById("patterns");
+        patternContainer.innerHTML= "";
+        console.log(patternContainer);
+        items.patterns.forEach(([enabled, pattern]) => {
+            console.log(enabled, pattern);
+            let item = document.createElement("div");
+            item.setAttribute("class", "row");
+
+            let enableCheckbox = document.createElement("input");
+            enableCheckbox.setAttribute("type", "checkbox");
+            if (enabled)
+                enableCheckbox.setAttribute("checked", true);
+            item.appendChild(enableCheckbox);
+
+            let patternInput = document.createElement("input");
+            patternInput.setAttribute("type", "text");
+            patternInput.setAttribute("value", pattern);
+            patternInput.setAttribute("class", "pattern-input");
+            item.appendChild(patternInput);
+
+            patternContainer.appendChild(item);
+        });
     });
 }
 

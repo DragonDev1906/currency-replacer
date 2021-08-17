@@ -1,0 +1,18 @@
+.row {
+    display: flex;
+}
+.row input[type=text] {
+    flex: 1;
+}
+.row input[type=checkbox] {
+    margin: auto 0.5em;
+}
+input[type=text] {
+    padding: .33em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 1px;
+}
+.category {
+    margin: 0.5em 0;
+}
