@@ -17,7 +17,7 @@ class Replacer {
         ]);
         // Filter for enabled patterns and combine them
         let patterns_source = this.options.patterns
-            .filter(x => x[0])
+            .filter(x => x[0] && x[1] != "")
             .map(x => x[1])
         if (patterns_source.length == 0)
             return;     // Don't do anything if there are no patterns enabled
