@@ -16,14 +16,12 @@ class Replacer {
             })
         ]);
         // Filter for enabled patterns and combine them
-        this.pattern = new RegExp(
-            this.options.patterns
-                .filter(x => x[0])
-                .map(x => x[1])
-                .join("|"), 
-            "gi"
-        );
-        console.log(this.pattern);
+        let patterns_source = this.options.patterns
+            .filter(x => x[0])
+            .map(x => x[1])
+        if (patterns_source.length == 0)
+            return;     // Don't do anything if there are no patterns enabled
+        this.pattern = new RegExp(patterns_source.join("|"), "gi");
         this.replace();
     }
 
