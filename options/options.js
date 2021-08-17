@@ -1,8 +1,17 @@
 function save_options() {
     let output_format = document.getElementById("output_format").value;
+    let patternContainer = document.getElementById("patterns");
+    let patterns = [];
+    patternContainer.childNodes.forEach(rowElement => {
+        patterns.push([
+            rowElement.childNodes[0].checked,
+            rowElement.childNodes[1].value,
+        ]);
+    })
     
     chrome.storage.sync.set({
-        output_format: output_format, 
+        output_format: output_format,
+        patterns: patterns
     }, () => {
         let status_div = document.getElementById("status");
         status_div.textContent = "Options saved.";
@@ -20,7 +29,6 @@ function restore_options() {
         //Patterns
         let patternContainer = document.getElementById("patterns");
         patternContainer.innerHTML= "";
-        console.log(patternContainer);
         items.patterns.forEach(([enabled, pattern]) => {
             appendPattern(patternContainer, enabled, pattern);
         });
