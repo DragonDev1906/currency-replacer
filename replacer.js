@@ -15,7 +15,15 @@ class Replacer {
                 }
             })
         ]);
-        this.pattern = new RegExp(this.options.patterns.join("|"), "gi");
+        // Filter for enabled patterns and combine them
+        this.pattern = new RegExp(
+            this.options.patterns
+                .filter(x => x[0])
+                .map(x => x[1])
+                .join("|"), 
+            "gi"
+        );
+        console.log(this.pattern);
         this.replace();
     }
 
