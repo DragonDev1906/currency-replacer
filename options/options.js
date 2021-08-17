@@ -22,26 +22,40 @@ function restore_options() {
         patternContainer.innerHTML= "";
         console.log(patternContainer);
         items.patterns.forEach(([enabled, pattern]) => {
-            console.log(enabled, pattern);
-            let item = document.createElement("div");
-            item.setAttribute("class", "row");
-
-            let enableCheckbox = document.createElement("input");
-            enableCheckbox.setAttribute("type", "checkbox");
-            if (enabled)
-                enableCheckbox.setAttribute("checked", true);
-            item.appendChild(enableCheckbox);
-
-            let patternInput = document.createElement("input");
-            patternInput.setAttribute("type", "text");
-            patternInput.setAttribute("value", pattern);
-            patternInput.setAttribute("class", "pattern-input");
-            item.appendChild(patternInput);
-
-            patternContainer.appendChild(item);
+            appendPattern(patternContainer, enabled, pattern);
         });
     });
 }
 
+function appendPattern(patternContainer, enabled, pattern) {
+    let item = document.createElement("div");
+    item.setAttribute("class", "row");
+
+    let enableCheckbox = document.createElement("input");
+    enableCheckbox.setAttribute("type", "checkbox");
+    if (enabled)
+        enableCheckbox.setAttribute("checked", true);
+    item.appendChild(enableCheckbox);
+
+    let patternInput = document.createElement("input");
+    patternInput.setAttribute("type", "text");
+    patternInput.setAttribute("value", pattern);
+    patternInput.setAttribute("class", "pattern-input");
+    item.appendChild(patternInput);
+
+    let removeButton = document.createElement("button");
+    removeButton.setAttribute("class", "remove-button");
+    removeButton.addEventListener("click", () => {
+        patternContainer.removeChild(item);
+    });
+    removeButton.innerText = "-"
+    item.appendChild(removeButton);
+
+    patternContainer.appendChild(item);
+}
+
 document.addEventListener("DOMContentLoaded", restore_options);
 document.getElementById("save").addEventListener("click", save_options);
+document.getElementById("add_pattern").addEventListener("click", () => {
+    appendPattern(document.getElementById("patterns"), true, "");
+})

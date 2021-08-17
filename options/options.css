@@ -16,3 +16,18 @@ input[type=text] {
 .category {
     margin: 0.5em 0;
 }
+.add-button {
+    background-color: lime;
+}
+.remove-button {
+    background-color: #FF4040;
+}
+.add-button, .remove-button {
+    border: none;
+    padding: auto;
+    width: 1.35em;
+    height: 1.35em;
+    border-radius: .5em;
+    float: right;
+    margin: 0.5em 0.2em;
+}
