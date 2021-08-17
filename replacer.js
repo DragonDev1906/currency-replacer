@@ -10,10 +10,6 @@ const pattern = new RegExp([
     // Catch "1337 RAI"
     /\b(?<rai1>\d+(?:\.\d+)?)\s*RAI\b/,
 ].map(r => r.source).join("|"), "gi")
-const accuracies = {
-    "USD": 2,
-    "RAI": 4
-}
 
 class Replacer {
     pricesInUSD = null;
@@ -46,11 +42,12 @@ class Replacer {
             return amount * price;
     }
     getReplaceValue(amount_usd) {
-        return this.options.output_format.replace(/{(\w+)}/gi, (match, currency) => {
+        return this.options.output_format.replace(/{(\w+)(?:\:(\d+))?}/gi, (match, currency, decimals) => {
+            if (decimals === undefined)
+                decimals = 2;
             // Convert to the target currency if possible
             let amount = this.convertFromUSD(currency, amount_usd)
-            let accuracy = accuracies[currency.toUpperCase()];
-            return (amount === undefined) ? match : amount.toFixed(accuracy);
+            return (amount === undefined) ? match : amount.toFixed(decimals);
         });
     }
     extractUSDValueFromCaptureGroups(captureGroups) {
