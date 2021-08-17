@@ -8,5 +8,12 @@
             "matches": ["<all_urls>"],
             "js": ["fetchPriceFunctions.js", "replacer.js"]
         }
+    ],
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": false
+    },
+    "permissions": [
+        "storage"
     ]
 }

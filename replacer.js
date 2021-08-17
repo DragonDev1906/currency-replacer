@@ -10,17 +10,31 @@ const pattern = new RegExp([
     // Catch "1337 RAI"
     /\b(?<rai1>\d+(?:\.\d+)?)\s*RAI\b/,
 ].map(r => r.source).join("|"), "gi")
-const replace_format = "{rai} RAI ({usd} USD)";
 const accuracies = {
     "USD": 2,
     "RAI": 4
 }
 
+default_options = {
+    output_format: "{rai} RAI"
+}
+
 class Replacer {
     pricesInUSD = null;
+    options = null;
 
     async run() {
-        this.pricesInUSD = await fetchAllPricesInUSD();
+        [this.pricesInUSD, this.options] = await Promise.all([
+            fetchAllPricesInUSD(),
+            new Promise((resolve, reject) => {
+                try {
+                    chrome.storage.sync.get(default_options, resolve);
+                }
+                catch (ex) {
+                    reject(ex);
+                }
+            })
+        ]);
         this.replace();
     }
 
@@ -36,7 +50,7 @@ class Replacer {
             return amount * price;
     }
     getReplaceValue(amount_usd) {
-        return replace_format.replace(/{(\w+)}/gi, (match, currency) => {
+        return this.options.output_format.replace(/{(\w+)}/gi, (match, currency) => {
             // Convert to the target currency if possible
             let amount = this.convertFromUSD(currency, amount_usd)
             let accuracy = accuracies[currency.toUpperCase()];
