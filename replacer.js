@@ -15,10 +15,6 @@ const accuracies = {
     "RAI": 4
 }
 
-default_options = {
-    output_format: "{rai} RAI"
-}
-
 class Replacer {
     pricesInUSD = null;
     options = null;

@@ -13,9 +13,7 @@ function save_options() {
 }
 
 function restore_options() {
-    chrome.storage.sync.get({
-        output_format: "{rai} RAI"
-    }, (items) => {
+    chrome.storage.sync.get(default_options, (items) => {
         document.getElementById("output_format").value = items.output_format;
     });
 }

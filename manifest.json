@@ -6,7 +6,7 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["fetchPriceFunctions.js", "replacer.js"]
+            "js": ["defaultOptions.js", "fetchPriceFunctions.js", "replacer.js"]
         }
     ],
     "options_ui": {
