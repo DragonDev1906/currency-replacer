@@ -1,19 +1,7 @@
-// Settings
-// \d+(?:\.\d+)? catches a number (using this alone won't work)
-// (?<usd1>\d+(?:\.\d+)?) catches a number and marks it as currency USD
-// (a capture group name can't repeat, therefore numbers in capture group names are ignored!)
-const pattern = new RegExp([
-    // Catch "1337 USD" and "1337 US Dollar"
-    /\b(?<usd1>\d+(?:\.\d+)?)\s*(?:USD|US\s*Dollar|US-Dollar)\b/,
-    // Catch "$1337" (There can't be a \b before the "$"!)
-    /\$(?<usd2>\d+(?:\.\d+)?)\b/,
-    // Catch "1337 RAI"
-    /\b(?<rai1>\d+(?:\.\d+)?)\s*RAI\b/,
-].map(r => r.source).join("|"), "gi")
-
 class Replacer {
     pricesInUSD = null;
     options = null;
+    pattern = null;
 
     async run() {
         [this.pricesInUSD, this.options] = await Promise.all([
@@ -27,6 +15,7 @@ class Replacer {
                 }
             })
         ]);
+        this.pattern = new RegExp(this.options.patterns.join("|"), "gi");
         this.replace();
     }
 
@@ -69,7 +58,7 @@ class Replacer {
         let currentNode = treeWalker.currentNode;
         while(currentNode) {
             // Replace everything matched by the pattern
-            currentNode.nodeValue = currentNode.nodeValue.replace(pattern, (...args) => {
+            currentNode.nodeValue = currentNode.nodeValue.replace(this.pattern, (...args) => {
                 // The information we really need is stored in the last element
                 let captureGroups = args[args.length - 1];
                 // Take any of the results found and convert it to USD
