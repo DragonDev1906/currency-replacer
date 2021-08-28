@@ -23,6 +23,8 @@ The regex should always contain a number specified as follows: `(?<usd1>\d+(?:\.
 This extension will not work for all occurances. Replacing the string in a text/input field might break the website, for example. And some other situations are too problematic to find (for example `100 <span>USD</span>`). It might also not work if the website is dynamically modified using javascript.
 
 ## Currently supported currencies
+A list of all loaded currencies can be seen in the console output.
+
 - USD
 - RAI
 - The top 100 Currencies by Marketcap (as of Coingecko)
