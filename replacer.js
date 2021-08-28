@@ -23,6 +23,7 @@ class Replacer {
             return;     // Don't do anything if there are no patterns enabled
         this.pattern = new RegExp(patterns_source.join("|"), "gi");
         this.replace();
+        console.log("Replacement finished");
     }
 
     // Helper functions

@@ -25,3 +25,4 @@ This extension will not work for all occurances. Replacing the string in a text/
 ## Currently supported currencies
 - USD
 - RAI
+- The top 100 Currencies by Marketcap (as of Coingecko)
