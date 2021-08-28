@@ -42,7 +42,7 @@ The regex should always contain a number specified as follows: `(?<usd1>\d+(?:\.
 - `\b(?<rai1>\d+(?:\.\d+)?)\s*RAI\b` Finds all occurances of "1336 RAI", allowing you to convert in both directions.
 
 ## Currently supported currencies
-A list of all loaded currencies can be seen in the console output.
+A list of all loaded currencies can be seen in the console output after a page is loaded with the extension enabled.
 
 - USD
 - RAI
